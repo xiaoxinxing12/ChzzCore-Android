@@ -10,5 +10,5 @@ package org.chzz.core.net.callback;
 public interface IRequest {
 
     void onRequestStart();
-    void onRequestEnd();
+    void onRequestEnd(int code,String msg);
 }

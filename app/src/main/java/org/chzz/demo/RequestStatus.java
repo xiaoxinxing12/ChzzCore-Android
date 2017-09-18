@@ -20,12 +20,12 @@ public class RequestStatus implements IRequest {
 
     @Override
     public void onRequestStart() {
-    showLoadingDialog();
+        showLoadingDialog();
     }
 
     @Override
-    public void onRequestEnd() {
-     dismissLoadingDialog();
+    public void onRequestEnd(int code ,String msg) {
+        dismissLoadingDialog();
     }
 
     /**

@@ -52,17 +52,16 @@ public class RequestCallback implements Callback<String> {
                 } else {
                     Toast.makeText(Chzz.getApplication(), "请设置回调接口", Toast.LENGTH_SHORT).show();
                 }
-                if (REQUEST != null) {
-                    REQUEST.onRequestEnd();
-                }
+
             }
         } else {
             if (ERROR != null) {
                 ERROR.onError(response.code(), response.message());
             }
-            Toast.makeText(Chzz.getApplication(), response.message(), Toast.LENGTH_SHORT).show();
         }
-
+        if (REQUEST != null) {
+            REQUEST.onRequestEnd(response.code(), response.message());
+        }
 
     }
 
@@ -73,9 +72,8 @@ public class RequestCallback implements Callback<String> {
             FAILURE.onFailure();
         }
         if (REQUEST != null) {
-            REQUEST.onRequestEnd();
+            REQUEST.onRequestEnd(-200, t.getLocalizedMessage());
         }
-        Toast.makeText(Chzz.getApplication(), t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
     }
 
 }
