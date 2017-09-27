@@ -54,7 +54,8 @@ public class CHZZClient {
                       RequestBody body, File file, Context context) {
         this.PARAMS = new HashMap<>();
         this.URL = URL;
-        this.PARAMS.putAll(params);
+        if (params != null)
+            this.PARAMS.putAll(params);
         this.REQUEST = request;
         this.SUCCESS = success;
         this.FAILURE = failure;

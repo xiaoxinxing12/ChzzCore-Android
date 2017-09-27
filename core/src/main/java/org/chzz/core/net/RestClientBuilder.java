@@ -47,25 +47,31 @@ public class RestClientBuilder {
     }
 
     public final RestClientBuilder params(Map<String, Object> params) {
-        PARAMS=new HashMap<>();
+        PARAMS = new HashMap<>();
         PARAMS.putAll(params);
         return this;
     }
 
     public final RestClientBuilder params(String key, Object value) {
 
+        if (null == PARAMS) {
+            PARAMS = new HashMap<>();
+        }
         this.PARAMS.put(key, value);
         return this;
     }
+
     public final RestClientBuilder file(File file) {
 
-        this.file=file;
+        this.file = file;
         return this;
     }
+
     public final RestClientBuilder file(String file) {
-        this.file=new File(file);
+        this.file = new File(file);
         return this;
     }
+
     public final RestClientBuilder raw(String raw) {
         this.mBody = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), raw);
 

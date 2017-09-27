@@ -22,7 +22,9 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:25.+'
-
+    compile 'me.yokeyword:fragmentation:1.1.2'
+    compile 'me.yokeyword:fragmentation-swipeback:1.1.2'
+    compile 'me.yokeyword:fragmentation:1.1.2'
     compile 'org.chzz:chzzui:3.1.2'
 
     //网络请求侦听

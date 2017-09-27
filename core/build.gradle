@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
-version = "0.0.3"
+version = "0.0.4"
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.0"
@@ -25,9 +25,9 @@ android {
 
 dependencies {
     //fragment的依赖
-    compile 'me.yokeyword:fragmentation:1.1.2'
-    compile 'me.yokeyword:fragmentation-swipeback:1.1.2'
-    compile 'me.yokeyword:fragmentation:1.1.2'
+    //compile 'me.yokeyword:fragmentation:1.1.2'
+    //compile 'me.yokeyword:fragmentation-swipeback:1.1.2'
+    //compile 'me.yokeyword:fragmentation:1.1.2'
     //网络请求依赖
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:converter-scalars:2.3.0'
