@@ -159,4 +159,8 @@ public class CHZZClient {
     public final void delete() {
         request(HttpMethod.DELETE);
     }
+
+    public final void upload() {
+        request(HttpMethod.UPLOAD);
+    }
 }

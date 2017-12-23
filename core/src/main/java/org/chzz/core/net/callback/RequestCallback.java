@@ -36,6 +36,9 @@ public class RequestCallback implements Callback<String> {
 
     @Override
     public void onResponse(Call<String> call, Response<String> response) {
+        if (REQUEST != null) {
+            REQUEST.onRequestEnd(response.code(), response.message());
+        }
         if (response.isSuccessful()) {
             if (call.isExecuted()) {
                 if (SUCCESS != null) {
@@ -59,10 +62,6 @@ public class RequestCallback implements Callback<String> {
                 ERROR.onError(response.code(), response.message());
             }
         }
-        if (REQUEST != null) {
-            REQUEST.onRequestEnd(response.code(), response.message());
-        }
-
     }
 
     @Override

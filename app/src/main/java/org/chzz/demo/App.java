@@ -7,6 +7,7 @@ import com.facebook.stetho.okhttp3.StethoInterceptor;
 
 import org.chzz.core.app.Chzz;
 import org.chzz.core.net.cookie.CookiesManager;
+import org.chzz.demo.common.ConstantValues;
 
 import java.util.concurrent.TimeUnit;
 
