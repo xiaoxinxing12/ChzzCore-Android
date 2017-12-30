@@ -22,6 +22,7 @@
         <activity android:name=".BindActivity" />
 
         <service android:name=".service.BindService" />
+        <activity android:name=".InstallActivity" android:exported="true"/>
     </application>
 
 
