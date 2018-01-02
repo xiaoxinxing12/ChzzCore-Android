@@ -42,4 +42,5 @@ dependencies {
 
     //webView
     compile 'com.just.agentweb:agentweb:2.0.0'
+    compile 'com.chrisplus.rootmanager:library:2.0.5@aar'
 }

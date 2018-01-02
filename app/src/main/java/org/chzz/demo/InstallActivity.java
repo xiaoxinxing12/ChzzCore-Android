@@ -5,9 +5,14 @@ import android.os.Environment;
 import android.view.View;
 import android.widget.Toast;
 
+import com.chrisplus.rootmanager.RootManager;
+
 import org.chzz.core.install.AutoInstaller;
+import org.chzz.core.util.ToastUtil;
+import org.chzz.demo.utils.ThreadUtil;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by copy on 2017/12/30.
@@ -20,6 +25,8 @@ public class InstallActivity extends BaseActivity {
 
     @Override
     protected void setListener() {
+        String apkRoot="chmod 777 "+getPackageCodePath();
+        SystemManager.RootCommand(apkRoot);
 
     }
 
@@ -27,7 +34,7 @@ public class InstallActivity extends BaseActivity {
     public static final String CACHE_FILE_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "Download";
     public static final String APK_URL = "http://imtt.dd.qq.com/16891/8EDB1BE21114D4BC6ABA4FC484B00A91.apk?fsname=org.chzz.scan_1.2.0_20.apk";
     private ProgressDialog mProgressDialog;
-
+    public static final String mTempPath = Environment.getDataDirectory().getAbsolutePath() + File.separator + "app";
     @Override
     protected void initView() {
         setContentView(R.layout.activity_install);
@@ -36,24 +43,50 @@ public class InstallActivity extends BaseActivity {
         mProgressDialog.setMessage("正在下载");
 
         findViewById(R.id.btn_install).setOnClickListener(this);
+        RunAsRooter();
+        RootManager.getInstance().hasRooted();
+        RootManager.getInstance().obtainPermission();
 
     }
+    private void RunAsRooter()
+    {
+        try {
+            Runtime.getRuntime().exec("su");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @Override
     public void onClick(View view) {
          /* 方案一: 默认安装器 */
         AutoInstaller installer = AutoInstaller.getDefault(this);
 //        installer.install(APK_FILE_PATH);
+       // installer.setmTempPath(mTempPath);
+        installer.setAppName("org.chzz.scan");
         installer.installFromUrl(APK_URL);
+        ToastUtil.show(mTempPath);
         installer.setOnStateChangedListener(new AutoInstaller.OnStateChangedListener() {
             @Override
             public void onStart() {
                 mProgressDialog.show();
+
             }
 
             @Override
             public void onComplete() {
                 mProgressDialog.dismiss();
+
+
+                ThreadUtil.runInThread(new Runnable() {
+                    @Override
+                    public void run() { RootManager.getInstance().installPackage(CACHE_FILE_PATH+"/org.chzz.scan.apk");
+
+                    }
+                });
             }
 
             @Override

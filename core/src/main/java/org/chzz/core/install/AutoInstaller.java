@@ -43,11 +43,28 @@ public class AutoInstaller extends Handler {
     private static volatile AutoInstaller mAutoInstaller;
     private Context mContext;
     private String mTempPath = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "Download";
+    private String appName;
+
+    public String getAppName() {
+        return appName;
+    }
+
+    public void setAppName(String appName) {
+        this.appName = appName;
+    }
 
     public enum MODE {
         ROOT_ONLY,
         AUTO_ONLY,
         BOTH
+    }
+
+    public String getmTempPath() {
+        return mTempPath;
+    }
+
+    public void setmTempPath(String mTempPath) {
+        this.mTempPath = mTempPath;
     }
 
     private MODE mMode = MODE.BOTH;
@@ -259,8 +276,9 @@ public class AutoInstaller extends Handler {
     private File downLoadFile(String httpUrl) {
         if (TextUtils.isEmpty(httpUrl)) throw new IllegalArgumentException();
         File file = new File(mTempPath);
+        Log.i("paht", mTempPath);
         if (!file.exists()) file.mkdirs();
-        file = new File(mTempPath + File.separator + "update.apk");
+        file = new File(mTempPath + File.separator + (appName == null ? "update" : appName)+".apk");
         InputStream inputStream = null;
         FileOutputStream outputStream = null;
         HttpURLConnection connection = null;

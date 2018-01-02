@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ChzzCore-Android</string>
+    <string name="sample_device_admin">admin</string>
 </resources>

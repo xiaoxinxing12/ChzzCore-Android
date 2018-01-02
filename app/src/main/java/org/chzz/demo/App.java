@@ -29,6 +29,7 @@ public class App extends Application {
     public void onCreate() {
 
         super.onCreate();
+
         app = this;
         //听诊器  如要使用网络听诊器 必须自定义 okHttpClient 传入Chzz
         Stetho.initializeWithDefaults(this);
