@@ -25,8 +25,7 @@ public class InstallActivity extends BaseActivity {
 
     @Override
     protected void setListener() {
-        String apkRoot="chmod 777 "+getPackageCodePath();
-        SystemManager.RootCommand(apkRoot);
+
 
     }
 
@@ -43,20 +42,8 @@ public class InstallActivity extends BaseActivity {
         mProgressDialog.setMessage("正在下载");
 
         findViewById(R.id.btn_install).setOnClickListener(this);
-        RunAsRooter();
-        RootManager.getInstance().hasRooted();
-        RootManager.getInstance().obtainPermission();
 
-    }
-    private void RunAsRooter()
-    {
-        try {
-            Runtime.getRuntime().exec("su");
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
     }
 
 

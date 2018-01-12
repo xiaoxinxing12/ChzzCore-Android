@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <com.king.view.radarview.RadarView
+            android:id="@+id/rv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100"
+            app:circleColor="@color/colorPrimary"
+            app:insideStrokeWidth="100dp"
+            app:labelText="Score"
+            app:lineStrokeWidth="100dp"
+            app:outsideStrokeWidth="100dp" />
+    </RelativeLayout>
+
+    <org.chzz.demo.DashboardView2
+        android:id="@+id/dashboard_view_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp" />
+
+    <org.chzz.demo.DashboardView3
+        android:id="@+id/dashboard_view_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp" />
+</LinearLayout>

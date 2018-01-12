@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+
     package="org.chzz.demo">
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
@@ -32,6 +33,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".BindActivity" />
+        <activity android:name=".RadarViewActivity" android:exported="true"/>
 
         <service android:name=".service.BindService" />
         <receiver
@@ -44,6 +46,11 @@
                 android:resource="@xml/admin" />
             <intent-filter>
                 <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".BootBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
     </application>
