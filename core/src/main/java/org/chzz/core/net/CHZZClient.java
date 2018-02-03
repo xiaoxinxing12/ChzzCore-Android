@@ -11,6 +11,7 @@ import org.chzz.core.net.callback.ISuccess;
 import org.chzz.core.net.callback.RequestCallback;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,6 +20,7 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -69,12 +71,16 @@ public class CHZZClient {
         return new RestClientBuilder();
     }
 
+    private void request(HttpMethod method) {
+        request(method, false);
+    }
+
     /**
      * 判断使用什么方法请求
      *
      * @param method
      */
-    private void request(HttpMethod method) {
+    private String request(HttpMethod method, boolean async) {
         final RestService service = RestCreator.getRestService();
         //回调
         Call<String> call = null;
@@ -110,11 +116,25 @@ public class CHZZClient {
                 break;
 
         }
-        if (call != null) {
+        if (call != null && !async) {
             call.enqueue(getRequestCallBack());
-        } else {
-            Toast.makeText(Chzz.getApplication(), "你用什么方法,哥识别不了", Toast.LENGTH_LONG).show();
+            return null;
+        } else if (call != null) {
+            try {
+                Response<String> response = call.execute();
+                if (response != null && null != response.body()) {
+                    return response.body();
+                } else if (response != null && response.code() == 302) {
+                    return "302";
+                } else {
+                    return "302";
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "302";
+            }
         }
+        return "302";
     }
 
     private Callback<String> getRequestCallBack() {
@@ -130,6 +150,13 @@ public class CHZZClient {
     }
 
     /**
+     * get请求
+     */
+    public final String asyncGet() {
+        return request(HttpMethod.GET, true);
+    }
+
+    /**
      * post 请求
      */
     public final void post() {
@@ -140,6 +167,21 @@ public class CHZZClient {
                 throw new RuntimeException("参数错误");
             }
             request(HttpMethod.POST_RAW);
+        }
+
+    }
+
+    /**
+     * post 请求
+     */
+    public final String asyncPost() {
+        if (BODY == null) {
+            return request(HttpMethod.POST, true);
+        } else {
+            if (!PARAMS.isEmpty()) {
+                throw new RuntimeException("参数错误");
+            }
+            return request(HttpMethod.POST_RAW, true);
         }
 
     }

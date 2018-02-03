@@ -15,8 +15,10 @@ import org.chzz.core.util.MD5Util;
 import org.chzz.core.util.ToastUtil;
 import org.chzz.demo.common.ConstantValues;
 import org.chzz.demo.model.LoginEntity;
+import org.chzz.demo.utils.GsonTools;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,13 +37,14 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         mHttp = (Button) findViewById(R.id.but_test);
-//        mHttp.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                testHttp02();
-//            }
-//        });
-        test();
+        mHttp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        //testHttp02();
+        searchId(null);
     }
 
     @Override
@@ -56,7 +59,7 @@ public class MainActivity extends BaseActivity {
             if (adapter.isEnabled()) {
                 ToastUtil.show("isEnabled");
             } else {
-                ToastUtil.show(adapter.isDiscovering()+"");
+                ToastUtil.show(adapter.isDiscovering() + "");
             }
         }
     }
@@ -78,6 +81,16 @@ public class MainActivity extends BaseActivity {
                 .post();
     }
 
+    private void searchId(String text) {
+        String url = "http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.search.catalogSug&query=" + "刘德华";
+       String json = CHZZClient.builder()
+                .url(url)
+                .params(new HashMap<String, Object>())
+                .build()
+                .asyncGet();
+        ToastUtil.show(json);
+    }
+
     private void testHttp02() {
         Map<String, Object> data = new HashMap<>();
         data.put("loginName", "hospital");
@@ -85,7 +98,7 @@ public class MainActivity extends BaseActivity {
         CHZZClient.builder()
                 .params(data)
                 .onRequest(new RequestStatus(this))
-                .url(ConstantValues.LOGIN_URL)
+                .url("http://www.baidu.com/")
                 .success(login)
                 .build()
                 .post();

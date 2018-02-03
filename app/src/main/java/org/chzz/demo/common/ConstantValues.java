@@ -21,7 +21,7 @@ public class ConstantValues {
     public static final String FAILUREMSG = "连接服务器失败,请检查网络连接.";
     public static final String NODATA = "没有更多数据";
     public static final String COMEFROM = "Android";
-    public static final String BASE_URL = "";
+    public static final String BASE_URL = "http://www.baidu.com";
     public static final String LOGIN_URL = "";
     //手机屏的宽度
     public static int SCREEN_WIDTH;

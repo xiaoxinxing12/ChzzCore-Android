@@ -39,7 +39,7 @@ public class App extends Application {
                 //超时时间
                 .connectTimeout(30, TimeUnit.SECONDS)
                 //cookie管理
-                .cookieJar(new CookiesManager(this))
+                //.cookieJar(new CookiesManager(this))
                 .build();
 
         //初始化所有配置
